@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a78aa10584.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+    <script type="text/javascript" src='../api/api_system.js'></script>
+    <style media="screen">
+      /*
+      Text1 : #1B1A17
+      Text2 : #E6D5B8
+      Box1 : #F0A500
+      Box2 : #E45826
+
+      red: #DD4A48
+      green: #95CD41
+
+      bg: #212121
+      */
+      body{
+        font-family: 'Hubballi', cursive;
+        color:#1B1A17;
+        background-color: #212121;
+      }
+      .boxo_orange{
+       background-color:  #F0A500;
+      }
+      .box_orange_fruit{
+        background-color: #E45826;
+      }
+      .box_orange_black{
+        background-color: #1B1A17;
+      }
+      .text_orange{
+        color: #F0A500;
+      }
+      .col-sm-6{
+        width: 24%;
+      }
+      .card{
+        margin-bottom:1.5rem;
+        -webkit-box-shadow: 1px 5px 22px 10px rgba(27,26,23,0.10);
+        box-shadow: 1px 5px 22px 10px rgba(27,26,23,0.10);
+      }
+      .card-title{
+        font-size: 1.6rem;
+      }
+      .card-text{
+        font-size: 1.2rem;
+      }
+      .color_red{
+        color:#DD4A48;
+      }
+      .color_green{
+        color:#95CD41;
+      }
+      .btn-custom{
+        background-color:#1B1A17;
+        border-radius: 10px;
+        border: 0.5px solid;
+        border-color:#1B1A17;
+        width: 12%;
+        padding: 0.4rem;
+        font-size: 1.4rem;
+      }
+      .btn-custom_input{
+        background-color:#1B1A17;
+        border-radius: 10px;
+        border: 0.5px solid;
+        border-color:#1B1A17;
+        width: 12%;
+        padding: 0.4rem;
+        font-size: 1.4rem;
+        color:white;
+      }
+      .btn-custom_input::placeholder{
+        color:gray;
+      }
+      .btn-custom:disabled{
+        color: gray !important;
+      }
+      textarea:focus, input:focus{
+       outline: none;
+      }
+      hr{
+        background-color:#F0A500;
+      }
+    </style>
+    </head>
+    <body>
+      <div class='container'>
+        <div class="d-flex justify-content-center" style="margin-top:3rem;">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card box_orange_black text_orange" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Status</h5>
+                <p class="card-text color_red" id='status'>off</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card box_orange_black text_orange" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Temperatura esterna</h5>
+                <p class="card-text">22°</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card box_orange_black text_orange" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Temperatura ugello</h5>
+                <p class="card-text" id='ugello'>0°</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card box_orange_black text_orange" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Vibrazione RMS</h5>
+                <p class="card-text" id='rms'>0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card box_orange_black text_orange" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Ventola</h5>
+                <p class="card-text color_red" id='ventola'>off</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card box_orange_black text_orange" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Tempo mancante</h5>
+                <p class="card-text" id='tempo'>00:00:00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6" style="width:47.5%;">
+            <div class="card box_orange_black text_orange" style="width: 100%;overflow: auto;height: 10rem;">
+              <div class="card-body">
+                <h5 class="card-title">LOG LIVE</h5>
+                <p class="card-text" id='log'>./</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      </div>
+      <hr>
+     <div class='container'>
+       <input type='text' placeholder="Nome proggetto" class='btn-custom_input' style="margin-bottom:1rem;width:30%;" id='input' onchange="check_input('input');"><br>
+       <button type="button" name="button" class='btn-custom color_green' id='button_start' disabled onclick="start();">Start</button>
+       <button type="button" name="button" class='btn-custom color_red' id='button_abort' disabled onclick="abort()">Stop</button>
+       <button type="button" name="button" class='btn-custom' style="color:white;" id='button_incoveniente' disabled onclick="prob()">Inconveniente</button>
+
+     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    let stampante = new Stampante(0,22,0,"off","off","00:00:00");
+    function check_input(x){
+      var y = document.getElementById(x).value;
+      if(y != ""){
+        document.getElementById('button_start').disabled = false;
+      }else{
+        document.getElementById('button_start').disabled = false;
+      }
+    }
+
+    function addMinutes(minutes) {
+      var minutesToAdd=minutes;
+      var currentDate = new Date();
+      var futureDate = new Date(currentDate.getTime() + minutesToAdd*60000);
+      return futureDate;
+    }
+
+    function start(){
+      stampante.run();
+      var in_funzione_homepage = setInterval(() => {
+
+        var status = stampante.status;
+        document.getElementById('status').innerText = status;
+        if(status == "off"){
+          document.getElementById('status').classList.remove("color_red");
+          document.getElementById('status').classList.remove("color_green");
+          document.getElementById('status').classList.add("color_red");
+        }else{
+          document.getElementById('status').classList.remove("color_red");
+          document.getElementById('status').classList.remove("color_green");
+          document.getElementById('status').classList.add("color_green");
+        }
+
+
+        var ventola = stampante.ventola;
+        document.getElementById('ventola').innerText = ventola;
+        if(ventola == "off"){
+          document.getElementById('ventola').classList.remove("color_red");
+          document.getElementById('ventola').classList.remove("color_green");
+          document.getElementById('ventola').classList.add("color_red");
+        }else{
+          document.getElementById('ventola').classList.remove("color_red");
+          document.getElementById('ventola').classList.remove("color_green");
+          document.getElementById('ventola').classList.add("color_green");
+        }
+
+        var ugello = stampante.ugello;
+        document.getElementById('ugello').innerText = ugello+"°";
+        if(ugello >= 180){
+          document.getElementById('ugello').classList.remove("color_red");
+          document.getElementById('ugello').classList.remove("color_green");
+          document.getElementById('ugello').classList.add("color_red");
+        }else if (ugello == 170) {
+          document.getElementById('ugello').classList.remove("color_red");
+          document.getElementById('ugello').classList.remove("color_green");
+          document.getElementById('ugello').classList.add("color_green");
+        }
+
+
+        var rms = stampante.rms;
+        document.getElementById('rms').innerText = rms;
+        if(rms >= 2){
+          document.getElementById('rms').classList.remove("color_red");
+          document.getElementById('rms').classList.remove("color_green");
+          document.getElementById('rms').classList.add("color_red");
+        }else if (rms == 1) {
+          document.getElementById('rms').classList.remove("color_red");
+          document.getElementById('rms').classList.remove("color_green");
+          document.getElementById('rms').classList.add("color_green");
+        }
+
+        if(rms == 0 && ugello == 0){
+          document.getElementById('button_incoveniente').disabled = true;
+          document.getElementById('button_abort').disabled = true;
+        }else{
+          document.getElementById('button_incoveniente').disabled = false;
+          document.getElementById('button_abort').disabled = false;
+        }
+
+        var log = stampante.log;
+        if(log != "undefined"){
+          document.getElementById('log').innerText = "./"+log;
+        }
+
+      }, 1000);
+
+      var countDownDate = new Date(addMinutes(1)).getTime();
+      if(document.getElementById("tempo").innerHTML != "<font class='color_green'>FINITO</font>"){
+        var x = setInterval(function() {
+
+          // prendo l'orario di ora
+          var now = new Date().getTime();
+
+          // trovo la differenza
+          var distance = countDownDate - now;
+
+          // mi calcolo i tempi
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // scrivo l'orario
+          document.getElementById("tempo").innerHTML = hours + "h "
+          + minutes + "m " + seconds + "s ";
+
+          // se il count finisce imposto il risultato
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("tempo").innerHTML = "<font class='color_green'>FINITO</font>";
+            alert("Progetto finito!");
+            document.getElementById("button_abort").click();
+            document.getElementById("tempo").innerHTML = "<font class='color_red'>ABORT</font>";
+          }else{
+            document.getElementById("button_abort").addEventListener("click", function(){
+              clearInterval(x);
+              document.getElementById("tempo").innerHTML = "<font class='color_red'>ABORT</font>";
+            });
+          }
+          document.getElementById("button_incoveniente").addEventListener("click", function(){
+            clearInterval(x);
+            document.getElementById("tempo").innerHTML = "<font class='color_red'>ABORT</font>";
+          });
+
+        }, 1000);
+      }else{
+        abort();
+      }
+    }
+
+
+    function abort(){
+      stampante.abort();
+    }
+
+    function prob(){
+      stampante.imprevisto();
+    }
+
+
+    </script>
+  </body>
+</html>
